@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>카메라 설정 가이드</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+    <!-- Navigation Bar -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#">카메라 설정 가이드</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="#">홈</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">카메라 둘러보기</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">설정 가이드</a>
+                    </li>
+                </ul>
+                <form class="d-flex">
+                    <input class="form-control me-2" type="search" placeholder="카메라 검색..." aria-label="Search">
+                    <button class="btn btn-outline-light" type="submit">검색</button>
+                </form>
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">로그인</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">회원가입</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <div class="p-5 mb-4 bg-light rounded-3 text-center">
+        <div class="container-fluid py-5">
+            <h1 class="display-5 fw-bold">최적의 카메라 설정을 찾으세요</h1>
+            <p class="col-md-8 fs-4 mx-auto">다양한 카메라 모델의 설정 가이드와 팁을 통해 최고의 사진과 영상을 만드세요.</p>
+            <button class="btn btn-primary btn-lg" type="button">가이드 시작하기</button>
+        </div>
+    </div>
+
+    <!-- Search and Filter UI -->
+    <div class="container my-5">
+        <div class="row mb-4">
+            <div class="col-md-8 offset-md-2">
+                <form class="d-flex">
+                    <input class="form-control me-2" type="search" placeholder="카메라 모델 또는 설정 검색..." aria-label="Search">
+                    <button class="btn btn-outline-primary" type="submit">검색</button>
+                </form>
+            </div>
+        </div>
+        <div class="row justify-content-center">
+            <div class="col-md-3 mb-3">
+                <select class="form-select" aria-label="브랜드 선택">
+                    <option selected>브랜드</option>
+                    <option value="1">캐논</option>
+                    <option value="2">소니</option>
+                    <option value="3">니콘</option>
+                    <option value="4">후지필름</option>
+                    <option value="5">파나소닉</option>
+                    <option value="6">블랙매직</option>
+                </select>
+            </div>
+            <div class="col-md-3 mb-3">
+                <select class="form-select" aria-label="카테고리 선택">
+                    <option selected>카테고리</option>
+                    <option value="1">풍경</option>
+                    <option value="2">인물</option>
+                    <option value="3">스포츠</option>
+                    <option value="4">영상</option>
+                    <option value="5">저조도</option>
+                </select>
+            </div>
+            <div class="col-md-3 mb-3">
+                <select class="form-select" aria-label="난이도 선택">
+                    <option selected>난이도</option>
+                    <option value="1">초급</option>
+                    <option value="2">중급</option>
+                    <option value="3">고급</option>
+                </select>
+            </div>
+        </div>
+    </div>
+
+    <!-- Content Grid -->
+    <div class="container my-5">
+        <h2 class="text-center mb-4">인기 카메라 설정 가이드</h2>
+        <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
+            <div class="col">
+                <div class="card h-100">
+                    <img src="https://via.placeholder.com/400x250?text=Camera+Model+1" class="card-img-top" alt="Camera Model 1">
+                    <div class="card-body">
+                        <h5 class="card-title">캐논 EOS R5 설정</h5>
+                        <p class="card-text">풍경 사진을 위한 최적의 설정 가이드입니다.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col">
+                <div class="card h-100">
+                    <img src="https://via.placeholder.com/400x250?text=Camera+Model+2" class="card-img-top" alt="Camera Model 2">
+                    <div class="card-body">
+                        <h5 class="card-title">소니 A7S III 영상 설정</h5>
+                        <p class="card-text">영화 같은 영상을 위한 전문가 설정입니다.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col">
+                <div class="card h-100">
+                    <img src="https://via.placeholder.com/400x250?text=Camera+Model+3" class="card-img-top" alt="Camera Model 3">
+                    <div class="card-body">
+                        <h5 class="card-title">니콘 Z9 스포츠 촬영 설정</h5>
+                        <p class="card-text">빠른 움직임을 포착하는 설정 팁입니다.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col">
+                <div class="card h-100">
+                    <img src="https://via.placeholder.com/400x250?text=Camera+Model+4" class="card-img-top" alt="Camera Model 4">
+                    <div class="card-body">
+                        <h5 class="card-title">후지필름 X-T4 인물 설정</h5>
+                        <p class="card-text">아름다운 인물 사진을 위한 설정입니다.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col">
+                <div class="card h-100">
+                    <img src="https://via.placeholder.com/400x250?text=Camera+Model+5" class="card-img-top" alt="Camera Model 5">
+                    <div class="card-body">
+                        <h5 class="card-title">파나소닉 GH6 저조도 설정</h5>
+                        <p class="card-text">어두운 환경에서 노이즈를 줄이는 설정입니다.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col">
+                <div class="card h-100">
+                    <img src="https://via.placeholder.com/400x250?text=Camera+Model+6" class="card-img-top" alt="Camera Model 6">
+                    <div class="card-body">
+                        <h5 class="card-title">블랙매직 포켓 시네마 6K 설정</h5>
+                        <p class="card-text">시네마틱 룩을 위한 고급 설정입니다.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-dark text-white text-center py-3 mt-5">
+        <div class="container">
+            <p>&copy; 2025 카메라 설정 가이드. All rights reserved.</p>
+            <p>
+                <a href="#" class="text-white mx-2">개인정보처리방침</a> |
+                <a href="#" class="text-white mx-2">이용약관</a>
+            </p>
+        </div>
+    </footer>
+
+    <!-- Bootstrap JS Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Custom JS -->
+    <script src="js/script.js"></script>
+</body>
+</html>
