@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Food Mark - 혼밥 레시피 소개 페이지</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Custom Styles for Dark Mode -->
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+        body.dark-mode {
+            background-color: #1a1a1a;
+            color: #f0f0f0;
+        }
+        .navbar.dark-mode, .footer.dark-mode {
+            background-color: #000 !important;
+            color: #f0f0f0 !important;
+        }
+        .card.dark-mode {
+            background-color: #333 !important;
+            color: #f0f0f0 !important;
+            border-color: #555 !important;
+        }
+        .btn-outline-secondary.dark-mode {
+            color: #f0f0f0;
+            border-color: #f0f0f0;
+        }
+        .btn-outline-secondary.dark-mode:hover {
+            background-color: #f0f0f0;
+            color: #1a1a1a;
+        }
+        .recipe-card {
+            cursor: pointer;
+        }
+        .recipe-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <div class="container-fluid justify-content-center">
+            <a class="navbar-brand" href="#">🍽️ Food Mark</a>
+        </div>
+    </nav>
+
+    <!-- Recipe Search Section -->
+    <div class="container my-3">
+        <div class="row justify-content-center">
+            <div class="col-md-8">
+                <div class="input-group">
+                    <input type="text" class="form-control" placeholder="레시피를 검색하세요..." aria-label="레시피 검색">
+                    <button class="btn btn-primary" type="button">검색</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Theme Toggle -->
+    <div class="text-center my-3">
+        <button id="themeToggle" class="btn btn-outline-secondary">🌙 다크 모드</button>
+    </div>
+
+    <!-- Main Content -->
+    <main class="container my-5">
+        <div class="text-center mb-5">
+            <h1 class="display-4">Food Mark – 혼밥 레시피 소개</h1>
+            <p class="lead text-muted">1인 가구를 위한 쉽고 빠르고 맛있는 레시피 소개. 카드 클릭 시 이미지와 레시피 단계가 나타나는 인터랙티브 형태.</p>
+        </div>
+
+        <!-- Popular Recipe Cards Section -->
+        <div class="row mb-5">
+            <div class="col-12">
+                <h2 class="mb-4 text-center">인기 레시피 카드</h2>
+                <div class="row row-cols-1 row-cols-md-3 g-4">
+                    <div class="col">
+                        <div class="card h-100 shadow-sm recipe-card" data-bs-toggle="modal" data-bs-target="#recipeModal"
+                            data-name="돼지고기 김치찌개"
+                            data-image="https://images.unsplash.com/photo-1519183071298-a2962be96c85?q=80&w=1200"
+                            data-recipe="재료: 돼지고기 200g, 김치 200g, 두부 1/2모, 파 약간, 물 500ml, 고춧가루 1큰술, 간장 1큰술|1) 돼지고기는 먹기 좋은 크기로 썰고, 김치는 먹기 좋게 자른다.|2) 냄비에 돼지고기를 볶다가 김치를 넣고 3분 정도 더 볶는다.|3) 물과 고춧가루, 간장을 넣고 끓인다.|4) 두부와 파를 넣고 5~7분 더 끓이면 완성.">
+                            <img src="https://images.unsplash.com/photo-1519183071298-a2962be96c85?q=80&w=1200" class="card-img-top" alt="돼지고기 김치찌개">
+                            <div class="card-body">
+                                <h5 class="card-title">돼지고기 김치찌개</h5>
+                                <p class="card-text">한국인의 소울푸드 김치찌개를 15분 만에 만드는 간편 레시피.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="card h-100 shadow-sm recipe-card" data-bs-toggle="modal" data-bs-target="#recipeModal"
+                            data-name="간장 계란밥"
+                            data-image="https://images.unsplash.com/photo-0kThMylLsbY?q=80&w=1200"
+                            data-recipe="재료: 밥 1공기, 계란 1개, 간장 1큰술, 참기름 1작은술, 쪽파 약간|1) 계란을 프라이 또는 스크램블로 조리한다.|2) 밥 위에 계란을 올리고 간장, 참기름을 뿌린다.|3) 쪽파를 송송 썰어 올리고 잘 섞어 먹는다.">
+                            <img src="https://images.unsplash.com/photo-0kThMylLsbY?q=80&w=1200" class="card-img-top" alt="간장 계란밥">
+                            <div class="card-body">
+                                <h5 class="card-title">간장 계란밥</h5>
+                                <p class="card-text">자취생 필수! 단돈 몇 분, 몇 가지 재료로 완성하는 마약 간장 계란밥.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="card h-100 shadow-sm recipe-card" data-bs-toggle="modal" data-bs-target="#recipeModal"
+                            data-name="알리오 올리오"
+                            data-image="https://images.unsplash.com/photo-1525755662778-989d0524087e?q=80&w=1200"
+                            data-recipe="재료: 스파게티 100g, 올리브 오일 2큰술, 마늘 3쪽, 페퍼론치노 약간, 파슬리 약간|1) 스파게티를 소금물에 삶는다.|2) 팬에 올리브오일과 다진 마늘, 페퍼론치노를 볶는다.|3) 삶은 스파게티를 넣고 섞은 후 파슬리를 뿌려 완성.">
+                            <img src="https://images.unsplash.com/photo-1525755662778-989d0524087e?q=80&w=1200" class="card-img-top" alt="알리오 올리오">
+                            <div class="card-body">
+                                <h5 class="card-title">알리오 올리오</h5>
+                                <p class="card-text">재료 최소화! 레스토랑 퀄리티의 알리오 올리오를 초간단 방법으로!</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="card h-100 shadow-sm recipe-card" data-bs-toggle="modal" data-bs-target="#recipeModal"
+                            data-name="야채비빔밥"
+                            data-image="https://images.unsplash.com/photo-1402131186566-1e4c56ddda91?q=80&w=1200"
+                            data-recipe="재료: 밥 1공기, 나물 여러가지, 고추장 1큰술, 참기름 1작은술|1) 나물은 각각 데치거나 볶아 준비한다.|2) 밥 위에 나물과 고추장을 올린다.|3) 참기름을 뿌리고 비벼서 먹는다.">
+                            <img src="https://images.unsplash.com/photo-1402131186566-1e4c56ddda91?q=80&w=1200" class="card-img-top" alt="야채비빔밥">
+                            <div class="card-body">
+                                <h5 class="card-title">야채비빔밥</h5>
+                                <p class="card-text">다양한 나물과 고추장의 조화, 건강한 한 끼 식사.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="card h-100 shadow-sm recipe-card" data-bs-toggle="modal" data-bs-target="#recipeModal"
+                            data-name="연어구이 & 샐러드"
+                            data-image="https://images.unsplash.com/photo-1490645935967-10de6ba17061?q=80&w=1200"
+                            data-recipe="재료: 연어 150g, 소금·후추, 샐러드 채소|1) 연어에 소금과 후추로 간을 한다.|2) 팬 또는 오븐에 구워준다.|3) 샐러드 채소와 함께 플레이팅한다.">
+                            <img src="https://images.unsplash.com/photo-1490645935967-10de6ba17061?q=80&w=1200" class="card-img-top" alt="연어구이 & 샐러드">
+                            <div class="card-body">
+                                <h5 class="card-title">연어구이 & 샐러드</h5>
+                                <p class="card-text">간단하지만 고급스러운, 건강한 연어 요리.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="card h-100 shadow-sm recipe-card" data-bs-toggle="modal" data-bs-target="#recipeModal"
+                            data-name="버터갈릭 감자구이"
+                            data-image="https://images.unsplash.com/photo-1467003909585-2f8a72700288?q=80&w=1200"
+                            data-recipe="재료: 감자 2개, 버터 1큰술, 마늘 2쪽, 허브 약간|1) 감자를 큼직하게 썰어 준비한다.|2) 팬에 버터와 마늘을 넣고 볶는다.|3) 감자를 넣고 허브와 함께 구워 완성.">
+                            <img src="https://images.unsplash.com/photo-1467003909585-2f8a72700288?q=80&w=1200" class="card-img-top" alt="버터갈릭 감자구이">
+                            <div class="card-body">
+                                <h5 class="card-title">버터갈릭 감자구이</h5>
+                                <p class="card-text">고소한 버터와 향긋한 마늘의 조화, 겉바속촉 감자구이.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="card h-100 shadow-sm recipe-card" data-bs-toggle="modal" data-bs-target="#recipeModal"
+                            data-name="토마토달걀볶음밥"
+                            data-image="https://images.unsplash.com/photo-1478145046317-39f10e56b5e9?q=80&w=1200"
+                            data-recipe="재료: 밥 1공기, 계란 1개, 토마토 1개, 마늘 1쪽, 소금·후추 약간|1) 팬에 마늘을 볶고 토마토를 넣는다.|2) 밥과 계란을 넣고 빠르게 볶는다.|3) 소금·후추로 간을 맞춘 후 완성.">
+                            <img src="https://images.unsplash.com/photo-1478145046317-39f10e56b5e9?q=80&w=1200" class="card-img-top" alt="토마토달걀볶음밥">
+                            <div class="card-body">
+                                <h5 class="card-title">토마토달걀볶음밥</h5>
+                                <p class="card-text">간단하지만 영양 가득, 새콤달콤 토마토달걀볶음밥.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Basic Cooking Tips Section -->
+        <div class="row mb-5">
+            <div class="col-lg-8 mx-auto">
+                <h2 class="mb-3">요리 기본 팁</h2>
+                <p>
+                    요리의 기본은 재료의 신선도와 적절한 양념 조합에 있습니다. <strong>기본 양념 조합</strong>을 익히면 어떤 요리든 쉽게 맛을 낼 수 있으며, <strong>재료 손질 팁</strong>을 통해 시간을 절약하고 효율적으로 요리할 수 있습니다. 또한, <strong>빠르게 맛을 내는 조리법</strong>을 활용하면 바쁜 일상 속에서도 맛있는 한 끼를 즐길 수 있습니다. 예를 들어, 다진 마늘과 파를 기름에 볶아 향을 내는 것은 많은 요리의 시작이며, 이는 요리의 풍미를 깊게 하는 간단하면서도 효과적인 방법입니다.
+                </p>
+            </div>
+        </div>
+    </main>
+
+    <!-- Recipe Detail Modal -->
+    <div class="modal fade" id="recipeModal" tabindex="-1" aria-labelledby="recipeModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="recipeModalLabel"></h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <img id="modalRecipeImage" src="" class="img-fluid rounded mb-3" alt="Recipe Image">
+                    <h6 class="text-muted">레시피</h6>
+                    <ul id="modalRecipeSteps" class="list-group list-group-flush">
+                        <!-- Recipe steps will be loaded here -->
+                    </ul>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">닫기</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="text-center py-4 mt-5 bg-light">
+        <p class="text-muted">&copy; 2025 Food Mark. All Rights Reserved.</p>
+    </footer>
+
+    <!-- Bootstrap JS Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Dark Mode Toggle and Recipe Modal Script -->
+    <script>
+        const themeToggleBtn = document.getElementById('themeToggle');
+        const body = document.body;
+        const navbar = document.querySelector('.navbar');
+        const footer = document.querySelector('footer');
+        const cards = document.querySelectorAll('.card'); // Select all cards for dark mode
+
+        // Function to apply theme
+        function applyTheme(theme) {
+            if (theme === 'dark') {
+                body.classList.add('dark-mode');
+                navbar.classList.add('dark-mode');
+                footer.classList.add('dark-mode');
+                themeToggleBtn.classList.add('dark-mode');
+                themeToggleBtn.textContent = '☀️ 라이트 모드';
+                cards.forEach(card => card.classList.add('dark-mode'));
+                document.querySelector('.modal-content').classList.add('dark-mode');
+            } else {
+                body.classList.remove('dark-mode');
+                navbar.classList.remove('dark-mode');
+                footer.classList.remove('dark-mode');
+                themeToggleBtn.classList.remove('dark-mode');
+                themeToggleBtn.textContent = '🌙 다크 모드';
+                cards.forEach(card => card.classList.remove('dark-mode'));
+                document.querySelector('.modal-content').classList.remove('dark-mode');
+            }
+        }
+
+        // Load saved theme on page load
+        window.onload = () => {
+            const savedTheme = localStorage.getItem('theme');
+            if (savedTheme) {
+                applyTheme(savedTheme);
+            } else {
+                // Default to light mode if no theme is saved
+                applyTheme('light');
+            }
+        };
+
+        // Toggle theme on button click
+        themeToggleBtn.addEventListener('click', () => {
+            const currentTheme = body.classList.contains('dark-mode') ? 'dark' : 'light';
+            const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+            localStorage.setItem('theme', newTheme);
+            applyTheme(newTheme);
+        });
+
+        // Recipe Modal Logic
+        const recipeModal = document.getElementById('recipeModal');
+        recipeModal.addEventListener('show.bs.modal', event => {
+            const button = event.relatedTarget; // Button that triggered the modal
+            const name = button.getAttribute('data-name');
+            const image = button.getAttribute('data-image');
+            const recipeSteps = button.getAttribute('data-recipe').split('|');
+
+            const modalTitle = recipeModal.querySelector('.modal-title');
+            const modalImage = recipeModal.querySelector('#modalRecipeImage');
+            const modalRecipeSteps = recipeModal.querySelector('#modalRecipeSteps');
+
+            modalTitle.textContent = name;
+            modalImage.src = image;
+            modalRecipeSteps.innerHTML = ''; // Clear previous steps
+
+            recipeSteps.forEach(step => {
+                const li = document.createElement('li');
+                li.classList.add('list-group-item');
+                li.textContent = step;
+                modalRecipeSteps.appendChild(li);
+            });
+
+            // Apply dark mode to modal content if body is in dark mode
+            if (body.classList.contains('dark-mode')) {
+                recipeModal.querySelector('.modal-content').classList.add('dark-mode');
+            } else {
+                recipeModal.querySelector('.modal-content').classList.remove('dark-mode');
+            }
+        });
+    </script>
+</body>
+</html>
