@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>카메라 소개 페이지</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Custom Styles for Dark Mode -->
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+        body.dark-mode {
+            background-color: #1a1a1a;
+            color: #f0f0f0;
+        }
+        .navbar.dark-mode, .footer.dark-mode {
+            background-color: #000 !important;
+            color: #f0f0f0 !important;
+        }
+        .card.dark-mode {
+            background-color: #333 !important;
+            color: #f0f0f0 !important;
+            border-color: #555 !important;
+        }
+        .btn-outline-secondary.dark-mode {
+            color: #f0f0f0;
+            border-color: #f0f0f0;
+        }
+        .btn-outline-secondary.dark-mode:hover {
+            background-color: #f0f0f0;
+            color: #1a1a1a;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <div class="container-fluid justify-content-center">
+            <a class="navbar-brand" href="#">📷 카메라 소개</a>
+        </div>
+    </nav>
+
+    <!-- Theme Toggle -->
+    <div class="text-center my-3">
+        <button id="themeToggle" class="btn btn-outline-secondary">🌙 다크 모드</button>
+    </div>
+
+    <!-- Main Content -->
+    <main class="container my-5">
+        <div class="text-center mb-5">
+            <h1 class="display-4">최신 카메라 소개</h1>
+            <p class="lead text-muted">현재 출시된 최신 미러리스 카메라의 특징과 장점 설명</p>
+        </div>
+
+        <!-- Camera Image Section -->
+        <div class="row mb-5">
+            <div class="col-12 text-center">
+                <img src="https://images.unsplash.com/photo-1519183071298-a2962be96c85?q=80&w=1200" class="img-fluid rounded shadow" alt="카메라 이미지">
+            </div>
+        </div>
+
+        <!-- Camera Types Section -->
+        <div class="row mb-5">
+            <div class="col-lg-8 mx-auto">
+                <h2 class="mb-3">카메라 종류</h2>
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item">DSLR</li>
+                    <li class="list-group-item">미러리스</li>
+                    <li class="list-group-item">컴팩트 카메라</li>
+                    <li class="list-group-item">액션 카메라</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Basic Shooting Tips Section -->
+        <div class="row mb-5">
+            <div class="col-lg-8 mx-auto">
+                <h2 class="mb-3">촬영 기초 팁</h2>
+                <p>
+                    사진 촬영의 기본은 빛을 이해하는 것에서 시작합니다. <strong>노출</strong>은 사진의 밝기를 결정하며, <strong>셔터스피드</strong>는 빛을 받아들이는 시간을 조절하여 움직임을 포착하거나 흐림 효과를 줍니다. <strong>조리개</strong>는 렌즈를 통해 들어오는 빛의 양과 피사계 심도(초점이 맞는 범위)를 제어하며, <strong>ISO</strong>는 센서의 빛에 대한 민감도를 나타내어 어두운 환경에서 유용하지만 노이즈가 증가할 수 있습니다. 이 네 가지 요소의 균형을 맞추는 것이 좋은 사진을 위한 핵심입니다.
+                </p>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="text-center py-4 mt-5 bg-light">
+        <p class="text-muted">&copy; 2025 카메라 소개 페이지. All Rights Reserved.</p>
+    </footer>
+
+    <!-- Bootstrap JS Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Dark Mode Toggle Script -->
+    <script>
+        const themeToggleBtn = document.getElementById('themeToggle');
+        const body = document.body;
+        const navbar = document.querySelector('.navbar');
+        const footer = document.querySelector('footer');
+        const cards = document.querySelectorAll('.card'); // Assuming cards might be added later
+
+        // Function to apply theme
+        function applyTheme(theme) {
+            if (theme === 'dark') {
+                body.classList.add('dark-mode');
+                navbar.classList.add('dark-mode');
+                footer.classList.add('dark-mode');
+                themeToggleBtn.classList.add('dark-mode');
+                themeToggleBtn.textContent = '☀️ 라이트 모드';
+                cards.forEach(card => card.classList.add('dark-mode'));
+            } else {
+                body.classList.remove('dark-mode');
+                navbar.classList.remove('dark-mode');
+                footer.classList.remove('dark-mode');
+                themeToggleBtn.classList.remove('dark-mode');
+                themeToggleBtn.textContent = '🌙 다크 모드';
+                cards.forEach(card => card.classList.remove('dark-mode'));
+            }
+        }
+
+        // Load saved theme on page load
+        window.onload = () => {
+            const savedTheme = localStorage.getItem('theme');
+            if (savedTheme) {
+                applyTheme(savedTheme);
+            } else {
+                // Default to light mode if no theme is saved
+                applyTheme('light');
+            }
+        };
+
+        // Toggle theme on button click
+        themeToggleBtn.addEventListener('click', () => {
+            const currentTheme = body.classList.contains('dark-mode') ? 'dark' : 'light';
+            const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+            localStorage.setItem('theme', newTheme);
+            applyTheme(newTheme);
+        });
+    </script>
+</body>
+</html>
