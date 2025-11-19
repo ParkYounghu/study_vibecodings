@@ -1,0 +1,529 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>프로덕션 가이드라인</title>
+    <style>
+        :root {
+            --bg-color: #ffffff;
+            --text-color: #333333;
+            --accent-color: #007bff;
+            --border-color: #dddddd;
+            --header-bg: #f8f9fa;
+            --card-bg: #fdfdfd;
+        }
+
+        body.dark-mode {
+            --bg-color: #121212;
+            --text-color: #e0e0e0;
+            --accent-color: #4dabf7;
+            --border-color: #444444;
+            --header-bg: #1e1e1e;
+            --card-bg: #2c2c2c;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px;
+            background-color: var(--header-bg);
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        header h1 {
+            margin: 0;
+            font-size: 1.8em;
+        }
+
+        .controls {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .toggle-switch {
+            position: relative;
+            display: inline-block;
+            width: 50px;
+            height: 28px;
+        }
+
+        .toggle-switch input {
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+
+        .slider {
+            position: absolute;
+            cursor: pointer;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: #ccc;
+            transition: .4s;
+            border-radius: 28px;
+        }
+
+        .slider:before {
+            position: absolute;
+            content: "";
+            height: 20px;
+            width: 20px;
+            left: 4px;
+            bottom: 4px;
+            background-color: white;
+            transition: .4s;
+            border-radius: 50%;
+        }
+
+        input:checked + .slider {
+            background-color: var(--accent-color);
+        }
+
+        input:checked + .slider:before {
+            transform: translateX(22px);
+        }
+
+        .tab-button {
+            padding: 8px 16px;
+            cursor: pointer;
+            border: 1px solid var(--border-color);
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            border-radius: 5px;
+        }
+
+        .tab-button.active {
+            background-color: var(--accent-color);
+            color: white;
+            border-color: var(--accent-color);
+        }
+
+        .tab-content {
+            display: none;
+            margin-top: 20px;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        .accordion-item {
+            border: 1px solid var(--border-color);
+            border-radius: 5px;
+            margin-bottom: 10px;
+            background-color: var(--card-bg);
+        }
+
+        .accordion-header {
+            background-color: var(--header-bg);
+            padding: 15px;
+            cursor: pointer;
+            font-size: 1.2em;
+            font-weight: bold;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .accordion-header::after {
+            content: '▼';
+            font-size: 0.8em;
+            transition: transform 0.3s;
+        }
+
+        .accordion-item.active .accordion-header::after {
+            transform: rotate(180deg);
+        }
+
+        .accordion-content {
+            padding: 0 15px;
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease-out, padding 0.3s ease-out;
+        }
+        
+        .accordion-content-inner {
+            padding: 15px 0;
+        }
+
+        .portfolio-item iframe {
+            width: 100%;
+            height: 400px;
+            border: none;
+            border-radius: 5px;
+            margin-bottom: 10px;
+        }
+
+        .footer-box {
+            margin-top: 40px;
+            padding: 20px;
+            border: 1px solid var(--border-color);
+            border-radius: 5px;
+            background-color: var(--header-bg);
+        }
+
+        .footer-box h3 {
+            margin-top: 0;
+        }
+
+        /* Admin Panel Styles */
+        .admin-section {
+            margin-bottom: 30px;
+            padding: 20px;
+            border: 1px solid var(--border-color);
+            border-radius: 5px;
+        }
+
+        .admin-section h3 {
+            margin-top: 0;
+            border-bottom: 2px solid var(--accent-color);
+            padding-bottom: 10px;
+        }
+
+        .crud-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 10px;
+            padding: 10px;
+            border-radius: 5px;
+            background-color: var(--bg-color);
+        }
+
+        .crud-item span {
+            flex-grow: 1;
+            word-break: break-all;
+        }
+
+        .crud-actions button {
+            padding: 5px 10px;
+            border: none;
+            border-radius: 3px;
+            cursor: pointer;
+        }
+
+        .edit-btn { background-color: #ffc107; }
+        .delete-btn { background-color: #dc3545; color: white; }
+        .save-btn { background-color: #28a745; color: white; }
+        .cancel-btn { background-color: #6c757d; color: white; }
+
+        .add-form {
+            display: flex;
+            gap: 10px;
+            margin-top: 15px;
+        }
+
+        .add-form input, .add-form textarea {
+            flex-grow: 1;
+            padding: 8px;
+            border: 1px solid var(--border-color);
+            border-radius: 3px;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+        }
+
+        .add-form button {
+            padding: 8px 15px;
+            border: none;
+            border-radius: 3px;
+            background-color: var(--accent-color);
+            color: white;
+            cursor: pointer;
+        }
+        
+        @media (max-width: 600px) {
+            header {
+                flex-direction: column;
+                gap: 15px;
+            }
+            .crud-item {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            .crud-actions {
+                margin-top: 10px;
+            }
+            .add-form {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <header>
+            <h1>프로덕션 가이드라인</h1>
+            <div class="controls">
+                <button id="admin-tab-button" class="tab-button">관리자</button>
+                <button id="main-tab-button" class="tab-button active">홈</button>
+                <label class="toggle-switch">
+                    <input type="checkbox" id="theme-toggle">
+                    <span class="slider"></span>
+                </label>
+            </div>
+        </header>
+
+        <main id="main-content" class="tab-content active">
+            <!-- Accordion items will be injected here by JavaScript -->
+        </main>
+
+        <div id="admin-panel" class="tab-content">
+            <h2>관리자 페이지</h2>
+            <!-- CRUD sections will be injected here -->
+        </div>
+        
+        <div class="footer-box">
+            <h3>대표자 정보</h3>
+            <p><strong>대표자:</strong> 빵후</p>
+            <p><strong>전화번호:</strong> 010-1234-1234</p>
+            <p><strong>이메일:</strong> dudgn7715@gmail.com</p>
+        </div>
+    </div>
+
+    <script>
+    document.addEventListener('DOMContentLoaded', () => {
+        const mainContent = document.getElementById('main-content');
+        const adminPanel = document.getElementById('admin-panel');
+        const mainTabButton = document.getElementById('main-tab-button');
+        const adminTabButton = document.getElementById('admin-tab-button');
+        const themeToggle = document.getElementById('theme-toggle');
+
+        const initialData = {
+            genreBudget: [
+                { id: 1, content: '웹드라마 (회당): 1,000만원 ~ 5,000만원' },
+                { id: 2, content: '홍보영상 (5분 내외): 500만원 ~ 2,000만원' },
+                { id: 3, content: '뮤직비디오: 2,000만원 ~ 1억원 이상' },
+            ],
+            portfolio: [
+                { id: 1, content: 'https://www.youtube.com/embed/SyJaPUSz01k' },
+            ],
+            aiGuide: [
+                { id: 1, content: 'AI는 물리 엔진의 한계로 복잡한 상호작용(예: 물이 튀는 장면) 표현이 어렵습니다.' },
+                { id: 2, content: '선정적이거나 폭력적인 콘텐츠 생성은 AI 정책상 불가능합니다.' },
+                { id: 3, content: 'AI는 아직 텍스트를 정확하게 이미지/영상으로 표현하는 데 한계가 있습니다.' },
+            ],
+            aiTools: [
+                { id: 1, content: 'RunwayML (gen-4)' },
+                { id: 2, content: 'Midjourney' },
+                { id: 3, content: 'Flow (veo3.1)' },
+            ],
+            customerCenter: [
+                { id: 1, content: 'Q: 영상 제작 기간은 얼마나 걸리나요? A: 기획과 분량에 따라 다르지만, 보통 4주에서 8주 정도 소요됩니다.' },
+                { id: 2, content: 'Q: 수정은 몇 번까지 가능한가요? A: 기본적으로 2회 수정을 제공하며, 추가 수정은 별도 비용이 발생할 수 있습니다.' },
+            ]
+        };
+
+        let appData = JSON.parse(localStorage.getItem('productionData')) || initialData;
+
+        function saveData() {
+            localStorage.setItem('productionData', JSON.stringify(appData));
+        }
+
+        const menuConfig = [
+            { id: 'genreBudget', title: '장르별 기본적 예산' },
+            { id: 'portfolio', title: '포트폴리오' },
+            { id: 'aiGuide', title: 'AI 제작 가이드라인' },
+            { id: 'aiTools', title: '자체 AI Tool 목록' },
+            { id: 'customerCenter', title: '고객센터' }
+        ];
+
+        function renderMainContent() {
+            mainContent.innerHTML = '';
+            menuConfig.forEach(menu => {
+                const items = appData[menu.id] || [];
+                const contentHtml = items.map(item => {
+                    if (menu.id === 'portfolio') {
+                        return `<div class="portfolio-item"><iframe src="${item.content}" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div>`;
+                    }
+                    return `<p>${item.content}</p>`;
+                }).join('');
+
+                const accordionItem = document.createElement('div');
+                accordionItem.className = 'accordion-item';
+                accordionItem.innerHTML = `
+                    <div class="accordion-header">${menu.title}</div>
+                    <div class="accordion-content">
+                        <div class="accordion-content-inner">${contentHtml}</div>
+                    </div>
+                `;
+                mainContent.appendChild(accordionItem);
+            });
+            addAccordionListeners();
+        }
+
+        function addAccordionListeners() {
+            const accordionItems = document.querySelectorAll('.accordion-item');
+            accordionItems.forEach(item => {
+                const header = item.querySelector('.accordion-header');
+                const content = item.querySelector('.accordion-content');
+                header.addEventListener('click', () => {
+                    const isActive = item.classList.toggle('active');
+                    content.style.maxHeight = isActive ? content.scrollHeight + 'px' : '0';
+                    content.style.padding = isActive ? '15px' : '0 15px';
+                });
+            });
+        }
+
+        function renderAdminPanel() {
+            adminPanel.innerHTML = '<h2>관리자 페이지</h2>';
+            menuConfig.forEach(menu => {
+                const section = document.createElement('div');
+                section.className = 'admin-section';
+                section.innerHTML = `<h3>${menu.title}</h3><div id="crud-list-${menu.id}"></div>`;
+                
+                const addForm = document.createElement('div');
+                addForm.className = 'add-form';
+                const inputType = menu.id === 'aiGuide' || menu.id === 'customerCenter' ? 
+                    `<textarea id="add-input-${menu.id}" placeholder="새 항목 내용"></textarea>` :
+                    `<input type="text" id="add-input-${menu.id}" placeholder="새 항목 내용">`;
+                
+                addForm.innerHTML = `
+                    ${inputType}
+                    <button data-id="${menu.id}">추가</button>
+                `;
+
+                section.appendChild(addForm);
+                adminPanel.appendChild(section);
+
+                renderCrudList(menu.id);
+            });
+            addAdminListeners();
+        }
+
+        function renderCrudList(key) {
+            const listContainer = document.getElementById(`crud-list-${key}`);
+            listContainer.innerHTML = '';
+            const items = appData[key] || [];
+            items.forEach(item => {
+                const div = document.createElement('div');
+                div.className = 'crud-item';
+                div.dataset.id = item.id;
+                div.innerHTML = `
+                    <span>${item.content}</span>
+                    <div class="crud-actions">
+                        <button class="edit-btn" data-key="${key}" data-id="${item.id}">수정</button>
+                        <button class="delete-btn" data-key="${key}" data-id="${item.id}">삭제</button>
+                    </div>
+                `;
+                listContainer.appendChild(div);
+            });
+        }
+
+        function addAdminListeners() {
+            adminPanel.addEventListener('click', (e) => {
+                const key = e.target.dataset.id;
+                const targetKey = e.target.dataset.key;
+                const id = parseInt(e.target.dataset.id, 10);
+
+                // Add
+                if (e.target.tagName === 'BUTTON' && !targetKey) {
+                    const input = document.getElementById(`add-input-${key}`);
+                    if (input && input.value.trim() !== '') {
+                        const newId = appData[key].length > 0 ? Math.max(...appData[key].map(i => i.id)) + 1 : 1;
+                        appData[key].push({ id: newId, content: input.value.trim() });
+                        input.value = '';
+                        saveData();
+                        renderCrudList(key);
+                        renderMainContent();
+                    }
+                }
+
+                // Delete
+                if (e.target.classList.contains('delete-btn')) {
+                    if (confirm('정말 삭제하시겠습니까?')) {
+                        appData[targetKey] = appData[targetKey].filter(item => item.id !== id);
+                        saveData();
+                        renderCrudList(targetKey);
+                        renderMainContent();
+                    }
+                }
+
+                // Edit
+                if (e.target.classList.contains('edit-btn')) {
+                    const itemDiv = e.target.closest('.crud-item');
+                    const span = itemDiv.querySelector('span');
+                    const originalContent = span.textContent;
+                    
+                    itemDiv.innerHTML = `
+                        <input type="text" class="edit-input" value="${originalContent}" style="flex-grow: 1;">
+                        <div class="crud-actions">
+                            <button class="save-btn" data-key="${targetKey}" data-id="${id}">저장</button>
+                            <button class="cancel-btn" data-key="${targetKey}" data-id="${id}">취소</button>
+                        </div>
+                    `;
+                }
+                
+                // Save
+                if (e.target.classList.contains('save-btn')) {
+                    const itemDiv = e.target.closest('.crud-item');
+                    const input = itemDiv.querySelector('.edit-input');
+                    const index = appData[targetKey].findIndex(item => item.id === id);
+                    if (index !== -1) {
+                        appData[targetKey][index].content = input.value;
+                        saveData();
+                        renderCrudList(targetKey);
+                        renderMainContent();
+                    }
+                }
+
+                // Cancel
+                if (e.target.classList.contains('cancel-btn')) {
+                    renderCrudList(targetKey);
+                }
+            });
+        }
+
+        // Tab switching
+        mainTabButton.addEventListener('click', () => {
+            mainContent.classList.add('active');
+            adminPanel.classList.remove('active');
+            mainTabButton.classList.add('active');
+            adminTabButton.classList.remove('active');
+        });
+
+        adminTabButton.addEventListener('click', () => {
+            mainContent.classList.remove('active');
+            adminPanel.classList.add('active');
+            mainTabButton.classList.remove('active');
+            adminTabButton.classList.add('active');
+        });
+
+        // Theme toggle
+        themeToggle.addEventListener('change', () => {
+            document.body.classList.toggle('dark-mode');
+            localStorage.setItem('theme', document.body.classList.contains('dark-mode') ? 'dark' : 'light');
+        });
+
+        if (localStorage.getItem('theme') === 'dark') {
+            document.body.classList.add('dark-mode');
+            themeToggle.checked = true;
+        }
+
+        // Initial Render
+        renderMainContent();
+        renderAdminPanel();
+    });
+    </script>
+</body>
+</html>
