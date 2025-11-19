@@ -2,7 +2,7 @@
 
 {
   "task": "웹사이트 생성",
-  "output_file": "docs/02_publishings.createsite.html",
+  "output_file": "docs/02_publishings_createsite.html",
   "requirements": {
     "title": "프로덕션 가이드라인 웹페이지 생성",
     "description": "20년차 연출감독이 클라이언트에게 보여주기 위한 프로덕션 소개 및 영상 제작 가이드라인 페이지를 생성한다. 모든 기능은 한 HTML 내부에서 작동하는 형태로 제작하며, 버튼 클릭 시 섹션이 열리고 닫히는 아코디언 방식으로 구성한다. 관리자 페이지 기능(CRUD)도 같은 HTML 안에서 탭 또는 토글 방식으로 이동할 수 있게 제작한다. 웹페이지 배경으로 YouTube 영상을 자동 재생, 반복, 음소거 상태로 표시하며, 배경 위에 텍스트 및 버튼 배치 가능.",
