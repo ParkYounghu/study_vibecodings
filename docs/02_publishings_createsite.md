@@ -1,10 +1,11 @@
 ```
+
 {
   "task": "웹사이트 생성",
   "output_file": "docs/02_publishings.createsite.html",
   "requirements": {
     "title": "프로덕션 가이드라인 웹페이지 생성",
-    "description": "20년차 연출감독이 클라이언트에게 보여주기 위한 프로덕션 소개 및 영상 제작 가이드라인 페이지를 생성한다. 모든 기능은 한 HTML 내부에서 작동하는 형태로 제작하며, 버튼 클릭 시 섹션이 열리고 닫히는 아코디언 방식으로 구성한다. 관리자 페이지 기능(CRUD)도 같은 HTML 안에서 탭 또는 토글 방식으로 이동할 수 있게 제작한다.",
+    "description": "20년차 연출감독이 클라이언트에게 보여주기 위한 프로덕션 소개 및 영상 제작 가이드라인 페이지를 생성한다. 모든 기능은 한 HTML 내부에서 작동하는 형태로 제작하며, 버튼 클릭 시 섹션이 열리고 닫히는 아코디언 방식으로 구성한다. 관리자 페이지 기능(CRUD)도 같은 HTML 안에서 탭 또는 토글 방식으로 이동할 수 있게 제작한다. 웹페이지 배경으로 YouTube 영상을 자동 재생, 반복, 음소거 상태로 표시하며, 배경 위에 텍스트 및 버튼 배치 가능.",
     "single_file_mode": true,
     "features": [
       "장르별 기본 예산 — CRUD 가능",
@@ -16,7 +17,10 @@
       "각 메뉴는 버튼을 눌렀을 때 설명이 펼쳐지는 아코디언 방식",
       "로컬스토리지(LocalStorage) 기반 데이터 저장",
       "관리자 기능은 페이지 내부의 별도 탭에서 운영",
-      "반응형 디자인"
+      "반응형 디자인",
+      "웹페이지 배경으로 YouTube 영상 자동 재생",
+      "배경 영상은 반복 재생, 음소거 상태, 화면 전체 표시",
+      "배경 영상 위에 텍스트/버튼 등 콘텐츠 표시 가능"
     ],
     "persona": {
       "role": "프로덕션 대표이자 20년차 연출감독",
@@ -51,13 +55,27 @@
       "aiTools",
       "customerCenter"
     ],
+    "sections": [
+      {
+        "title": "배경 영상",
+        "type": "video_background",
+        "source": "https://www.youtube.com/embed/SyJaPUSz01k?autoplay=1&mute=1&loop=1&playlist=SyJaPUSz01k",
+        "autoplay": true,
+        "mute": true,
+        "loop": true
+      }
+    ],
     "output_format": "HTML 단일 파일",
     "instructions": [
       "파일 전체는 하나의 HTML 내부에 CSS/JS 포함",
       "CRUD 기능은 JavaScript로 구현",
       "UI는 Bootstrap 또는 Tailwind 없이 순수 CSS 또는 CSS 포함형으로 구성",
-      "다크모드 전환은 body.classList.toggle 방식 사용"
+      "다크모드 전환은 body.classList.toggle 방식 사용",
+      "웹페이지 배경 영상 위에 텍스트와 버튼 배치 가능",
+      "관리자 페이지는 탭 또는 토글 방식으로 운영"
     ]
   }
 }
+
+
 ```
